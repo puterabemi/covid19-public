@@ -1,0 +1,61 @@
+---
+title: "Kinta"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Pre-amble
+
+calculate Kinta
+
+## Data & Library
+
+```{r}
+library(pacman)
+p_load(tidyverse, summarytools)
+```
+
+# Analysis
+
+## Malaysia
+
+```{r}
+cases_malaysia <- read_csv("epidemic/cases_malaysia.csv")
+cases_malaysia
+```
+
+```{r}
+cases_malaysia %>% 
+  select(date, cases_new) %>% 
+  mutate(csum = cumsum(cases_new)) %>% 
+  filter(csum <= 2600000)
+```
+
+
+
+## Perak
+
+
+```{r}
+cases_state <- read_csv("epidemic/cases_state.csv")
+cases_state
+```
+
+
+```{r}
+cases_state %>% 
+  filter(state == "Perak") %>% 
+  select(date, state, cases_new) %>% 
+  mutate(csum = cumsum(cases_new)) %>%
+  filter(csum <= 105000)
+```
+
+
+```{r}
+linelist_cases_00 <- read_csv("epidemic/linelist/linelist_cases_00.csv")
+linelist_cases_00
+```
+
